@@ -2,7 +2,7 @@
 This is Repository for CS5430.
 
 ## GitHub Directory Structure:
-    "*" 
+     
     - All Deliverables: You can find all the Delilverables that the project requres.
     - Source Code: Here is the actual souce code for the project
     - meeting minutes: This Directory is for the group meetup informations.
