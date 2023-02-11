@@ -6,3 +6,6 @@ Team Members List:
 3. Lethaswi Thokala - (skills: Database, UI/UX Design)
 4. Girish Vardhan Gavireddy - (skills: Database, Manual Testing,API Testing)
 5. Prathyusha Reddy Pippirada - (skills: Programming(Java/Python))
+6. Likhitha Reddy Sama - (Skills : Database , UI/UX Design , C# programming)
+7. Sai venkatarama Innamuri -(skills: programming languages python , java)
+
