@@ -1,0 +1,47 @@
+body {
+    background: var(--white-color);
+    font-family: 'Inconsolata', monospace;
+    background-image: url("image3.jpg");
+    background-repeat: no-repeat;
+    background-size: 3000px, 10000px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: 'Inconsolata', monospace;
+}
+
+.navItem {
+    font-family: 'Inconsolata', monospace;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+.navItem a:hover {
+    background-color: #b2c5e7;
+}
+
+.product-item {
+    width: 20rem;
+    max-width: 95%;
+}
+
+.product__title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.product__price {
+    text-align: center;
+    color: #4d4d4d;
+    margin-bottom: 0.5rem;
+}
+
+.product__description {
+    text-align: center;
+}
