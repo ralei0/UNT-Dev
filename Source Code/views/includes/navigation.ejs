@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-md navHead navItem navbar-dark bg-dark">
+    <div>
+        <% if(isAuthenticated) { %>
+            <a class="navbar-brand " href="/home">
+                    E-Shoe Shopping
+                </a>
+            <% }else if(!isAdmin){ %>
+                <a class="navbar-brand " href="/">
+                        E-Shoe Shopping
+                    </a>
+                <% } %>
+                    <%if(isAdmin) {%>
+                        <a class="navbar-brand " href="/admin/home">
+                            E-Shoe Shopping
+                        </a>
+                        <% } %>
+
+
+
+    </div>
+
+
+
+    <!-- Navbar Collapse -->
+    <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon "></span>
+        </button>
+    <div class="collapse navbar-collapse justify-content-end navItem " id="navbarToggle">
+        <ul class="navbar-nav ml-lg-auto">
+
+
+            <% if(isAdmin) { %>
+                <li class="nav-item">
+                    <form action="/admin/logout" method="POST">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <button class="btn" type="submit">Logout</button>
+                    </form>
+                </li>
+                <% }else {%>
+
+                    <% if(isAuthenticated) { %>
+                        <input type="text" placeholder="Search.." name="search">
+                        <li class="nav-item">
+
+                            <a class="nav-link smoothScroll" style="color: #fafeff;" href="/profile">Update Profile</a>
+                        </li>
+
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link smoothScroll" style="color: #fafeff;" href="/cart">Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link smoothScroll" style="color: #fafeff;" href="/orders">Your Orders</a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <form action="/logout" method="POST">
+                                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                <button class="btn" type="submit">Logout</button>
+                            </form>
+                        </li>
+                        <% } else {%>
+                            <input type="text" placeholder="Search.." name="search">
+                            <li class="nav-item">
+                                <a class="nav-link smoothScroll" style="color: #fafeff;" href="/login">Buyer Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link smoothScroll" style="color: #fafeff;" href="/register">Buyer Sign Up</a>
+                            </li>
+                            <li class="nav-item">
+                                <b> <a class="nav-link smoothScroll" style="color: #95f554;" href="/admin/login">Seller-Login</a></b>
+                            </li>
+                            <li class="nav-item">
+                                <b><a class="nav-link smoothScroll" style="color:#95f554;" href="/admin/register">Dummy-Seller-Register</a></b>
+                            </li>
+                            <% } %>
+                                <%} %>
+        </ul>
+
+    </div>
+</nav>

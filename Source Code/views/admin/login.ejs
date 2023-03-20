@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+<body>
+
+    <%- include('../includes/navigation.ejs') %>
+
+
+
+<% if(error_msg !='undefined') {%>
+    <strong>  <%= error_msg %></strong>
+
+<% } %>
+
+<div class="card" style="width:auto;border: none;text-align: center;">
+    <div class="card-body">
+<form class="text-center   p-5" style="width:20rem;text-align: center;" action="/admin/login" method="POST">
+
+    <p class="h4 mb-4">Sign in</p>
+
+    <input type="text" id="email" class="form-control mb-4" placeholder="E-mail" name="username" value="<%= typeof email !='undefined' ? email:'' %>" required>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <input type="password" id="password" class="form-control mb-4" placeholder="Password" name="password" required>
+    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+
+    
+
+</form>
+</div>
+</div>
+
+
+<%- include('../includes/end.ejs') %>

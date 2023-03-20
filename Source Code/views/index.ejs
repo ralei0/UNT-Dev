@@ -1,0 +1,60 @@
+<%- include('./includes/head.ejs') %>
+
+    <body>
+
+        <%- include('./includes/navigation.ejs') %>
+
+            <% if(error_msg !='undefined') {%>
+                <strong>  <%= error_msg %></strong>
+
+                <% } %>
+
+
+                    <% if(product.length>0) {%>
+                        <div class="container">
+                            <div class="row">
+                                <div>
+
+                                    <h3>List of all the available products.</h3>
+                                    <br>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-columns">
+                            <% for (let x of product) { %>
+
+                                <article class="card product-item">
+                                    <header class="card__header">
+                                        <h1 class="product__title"><b><%= x.title %></b></h1>
+                                    </header>
+                                    <div class="card__image; ">
+                                        <img src="/<%= x.imageUrl %>" class="img-thumbnail" width="260" height="240" alt="<%= x.title %>">
+                                    </div>
+                                    <div class="card__content">
+                                        <h2 class="product__price"><b>₹<%= x.price %></b></h2>
+                                        <p class="product__description">
+                                            <%= x.description %>
+                                        </p>
+                                    </div>
+                                    <div class="card__actions">
+                                        <a href="/products/<%= x._id %>" class="btn">Product Details</a>
+
+                                </article>
+
+                                <%} %>
+                                    </div>
+
+                                    <% } else {%>
+
+                                        <h1>Sorry ...No Orders Available!</h1>
+                                        <% }%>
+
+                                            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                                            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+                                            <%- include('./includes/end.ejs') %>

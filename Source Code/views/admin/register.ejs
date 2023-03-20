@@ -1,0 +1,36 @@
+<%- include('../includes/head.ejs') %>
+<body>
+
+    <%- include('../includes/navigation.ejs') %>
+    <% if(typeof errors !='undefined') {%>
+
+        <%for(error of errors) { %>
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <strong>  <%= error.msg %></strong> 
+              </div>
+         
+        <% } %>
+    
+    <% } %>
+<div class="card" style="width:auto;border: none;text-align: center;">
+    <div class="card-body">
+<form class="text-center   p-5" style="width:20rem;text-align: center;" action="/admin/register" method="POST">
+    
+    
+
+    <p class="h4 mb-4">Sign up</p>
+    
+    <input type="email" id="email" class="form-control mb-4" placeholder="E-mail" name="email" value="<%= typeof email !='undefined' ? email:'' %>" required>
+    <input type="password" id="password" class="form-control mb-4" placeholder="Password" name="password" value="<%= typeof password !='undefined' ? password:'' %>" required>
+    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+    <button class="btn btn-info btn-block my-4" type="submit">Register</button>
+
+
+</form>
+</div>
+</div>
+
+
+
+<%- include('../includes/end.ejs') %>
