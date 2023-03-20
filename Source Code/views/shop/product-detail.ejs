@@ -1,0 +1,26 @@
+<%- include('../includes/head.ejs') %>
+<body>
+<%- include('../includes/navigation.ejs') %>
+
+<% if(error_msg !='undefined') {%>
+    <strong>  <%= error_msg %></strong>
+
+<% } %>
+
+<main class="centered">
+    <h1><%= product.title %></h1>
+</main>
+
+    <hr>
+    <div class="centered">
+        <img class="centere" src="/<%= product.imageUrl %>"  class="img-thumbnail" width="360" height="320" alt="<%= product.title %>">
+    </div>
+    <b><h3 class="centered">$  <%= product.price %></h2></b>
+    <p class="centered"><%= product.description %></p>
+    <div class="card__actions">
+       <% if(isAuthenticated) { %>
+        <%- include('../includes/addToCart.ejs',{product:product._id}) %>
+    <% } %>
+    </div>
+
+<%- include('../includes/end.ejs') %>

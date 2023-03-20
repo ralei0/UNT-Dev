@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+<body>
+
+    <%- include('../includes/navigation.ejs') %>
+    <% if(error_msg !='undefined') {%>
+        <strong>  <%= error_msg %></strong>
+    
+    <% } %>
+    
+    
+
+    <section class="d-xl-inline-flex ">
+        <div class="container ">
+            <div class="row">
+
+                <form class="form-control-lg "  action="/admin/<% if(editing) { %>edit-product<% } else { %>add-product <% } %>" method="POST" enctype="multipart/form-data">
+                    <div class="form-row align-items-center  "></div>
+                    <div class="form-row align-items-center  ">
+                        <h3><label style="align-content: center;"><% if(editing) { %>Edit Product <% } else { %>  Add Product <% } %></label></h3>
+                        <input type="text" class="form-control" name="title" placeholder="Product Name" value="<% if(editing) { %><%= product.title %> <% } %>">
+                    </div>
+                    
+                    <div class="form-group">
+                        <h3><label>Upload Image </label></h3>
+                        <input type="file"class="form-control-file" id="imageUp" placeholder="Image Url" name="imageUp" required>
+                    </div>
+                    <div class="form-group">
+                        <h3><label> Price </label></h3>
+                        <input type="text" class="form-control" name="price" placeholder="Enter price" value="<% if(editing) { %><%= product.price %> <% } %>">
+                    </div>
+                    <div class="form-group">
+                        <h3><label>Description </label></h3>
+                        <textarea class="form-control" type="number" step="0.01" name="description" id="description" rows="4" placeholder="Description"><% if(editing) { %><%= product.description %> <% } %></textarea>
+                    </div>
+                    
+                    <% if(editing) { %><input type="hidden"  name="productId"value="<%= product._id %>"  > <% } %>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="btn btn-primary"><% if(editing) { %>Edit Product <% } else { %>  Add Product <% } %></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+   
+<%- include('../includes/end.ejs') %>

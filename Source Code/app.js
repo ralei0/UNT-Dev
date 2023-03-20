@@ -1,4 +1,58 @@
+const express = require('express');
+const path = require('path');
+const rootDir = require('./util/path.js');
+const bodyParser = require('body-parser');
+const errorControllers = require('./controllers/error');
+const mongoose = require('mongoose');
+const flash = require('connect-flash');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
+const csrf = require('csurf');
+const multer = require('multer');
+const bcrypt = require('bcryptjs');
+const indexRoutes = require('./routes/index');
+const adminRoutes = require('./routes/admin/admin');
+const adminAuthRoutes = require('./routes/admin/adminAuth');
+const userAuthRoutes = require('./routes/user/userAuth');
 
+const Admin = require('./models/Admin');
+const User = require('./models/User.js');
+
+const app = express();
+const csrfProtection = csrf();
+
+
+//Db connection
+const MONGODB_URI = require('./config/keys').MongoURI; //db keys
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log("Database Connection established");
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+
+
+
+
+
+
+
+const fileStorage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        console.log('======', file);
+        cb(null, 'images/');
+        //cb(null, path.join(__dirname, './models'))
+    },
+    filename: function(req, file, cb) {
+        // cb(null, new Date().toISOString() + '-' + file.originalname);
+        //let ext=path.extname(file.originalname)
+        cb(null, file.originalname);
+
+    }
+});
+//console.log('filestorage=====', fileStorage.destination);
 
 const fileFilter = function(req, file, cb) {
     if (
