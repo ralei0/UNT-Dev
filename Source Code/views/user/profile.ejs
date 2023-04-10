@@ -1,0 +1,158 @@
+<%- include('../includes/head.ejs') %>
+
+    <body>
+
+        <%- include('../includes/navigation.ejs') %>
+            <% if(typeof errors !='undefined') {%>
+
+                <%for(error of errors) { %>
+                    <div class="alert alert-dismissible alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>  <%= error.msg %></strong>
+                    </div>
+
+                    <% } %>
+
+                        <% } %>
+                            <div class="card" style="width:auto;border: none;text-align: center; background-image: url('gif_image.gif');">
+                                <div class="card-body">
+                                    <form class="text-center   p-5" style="width:20rem;text-align: center;" action="/profile" method="POST">
+
+
+
+                                        <!-- <p class="h4 mb-4">Update Profile</p> -->
+                                        <!-- <div class="form-group">
+                                            <label for="firstName">User ID:</label>
+                                            <input type="text" name="userId" id="userId" class="form-control" placeholder="Enter firstName" required><br>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="firstName">FirstName:</label>
+                                            <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Enter firstName" required><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastName">LastName:</label>
+                                            <input type="text" name="lastName" id="lastName" class="form-control" placeholder="Enter lastName" required><br>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="my-1 mr-2" for="gender">Gender:</label>
+                                            <select name="gender" style="outline:none !important; padding: 5px 10px" class="custom-select  my-1 mr-sm-2" id="gender">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Transgender">Transgender</option>
+                                                <option value="Non Binary">Non Binary</option>
+                                                <option value="Unknown">Rather not say</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="profilePicture">Profile Picture:</label>
+                                            <input type="file" class="form-control-file" name="profilePicture" id="profilePicture"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="websiteLink">Website Link:</label>
+                                            <input type="text" name="websiteLink" id="websiteLink" class="form-control" placeholder="Enter your url"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="youtubeLink">Youtube Link:</label>
+                                            <input type="text" name="youtubeLink" id="youtubeLink" class="form-control" placeholder="Enter your url"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="addressLine1">Address 1:</label>
+                                            <input type="text" name="addressLine1" id="addressLine1" class="form-control" placeholder="Enter your Address"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="addressLine2">Address 2:</label>
+                                            <input type="text" name="addressLine2" id="addressLine2" class="form-control" placeholder="Enter your Address"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="city">City:</label>
+                                            <input type="text" name="city" id="city" class="form-control" placeholder="Enter your City"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="state">State:</label>
+                                            <input type="text" name="state" id="state" class="form-control" placeholder="Enter your State"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="country">Country:</label>
+                                            <input type="text" name="country" id="country" class="form-control" placeholder="Enter your Country"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pincode">Pincode:</label>
+                                            <input type="number" name="pincode" id="pincode" class="form-control" placeholder="Enter your Pincode"><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bio">Bio:</label>
+                                            <input type="text" name="bio" id="bio" class="form-control" placeholder="Enter your Bio"><br>
+                                        </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        <!-- <input type="text" id="name" class="form-control mb-4" placeholder="Name" name="name" value="<%= typeof name !='undefined' ? name:'' %>" required>
+                                        <input type="email" id="email" class="form-control mb-4" placeholder="E-mail" name="email" value="<%= typeof email !='undefined' ? email:'' %>" required>
+                                        <input type="password" id="password" class="form-control mb-4" placeholder="Password" name="password" value="<%= typeof password !='undefined' ? password:'' %>" required>
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="password" id="password" class="form-control mb-4" placeholder="Confirm Password" name="password2" value="<%= typeof password2 !='undefined' ? password2:'' %>" required>
+                                        <button class="btn btn-info btn-block my-4" type="submit">Sign up</button> -->
+
+
+
+
+
+
+                                        <input type="text" id="userId" class="form-control mb-4" placeholder="userId" name="userId" value="<%= typeof userId !='undefined' ? userId:'' %>" required>
+                                        <input type="text" id="firstName" class="form-control mb-4" placeholder="firstName" name="firstName" value="<%= typeof firstName !='undefined' ? firstName:'' %>" required>
+                                        <input type="text" id="lastName" class="form-control mb-4" placeholder="lastName" name="lastName" value="<%= typeof lastName !='undefined' ? lastName:'' %>" required>
+                                        <input type="text" id="age" class="form-control mb-4" placeholder="age" name="age" value="<%= typeof age !='undefined' ? age:'' %>" required>
+
+                                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                                        <input type="text" id="gender" class="form-control mb-4" placeholder="gender" name="gender" value="<%= typeof gender !='undefined' ? gender:'' %>" required>
+                                        <input type="text" id="websiteLink" class="form-control mb-4" placeholder="websiteLink" name="websiteLink" value="<%= typeof websiteLink !='undefined' ? websiteLink:'' %>" required>
+                                        <input type="text" id="youtubeLink" class="form-control mb-4" placeholder="youtubeLink" name="youtubeLink" value="<%= typeof youtubeLink !='undefined' ? youtubeLink:'' %>" required>
+                                        <input type="text" id="addressLine1" class="form-control mb-4" placeholder="addressLine1" name="addressLine1" value="<%= typeof addressLine1 !='undefined' ? addressLine1:'' %>" required>
+                                        <input type="text" id="addressLine2" class="form-control mb-4" placeholder="addressLine2" name="addressLine2" value="<%= typeof addressLine2 !='undefined' ? addressLine2:'' %>" required>
+                                        <input type="text" id="city" class="form-control mb-4" placeholder="city" name="city" value="<%= typeof city !='undefined' ? city:'' %>" required>
+                                        <input type="text" id="state" class="form-control mb-4" placeholder="state" name="state" value="<%= typeof state !='undefined' ? state:'' %>" required>
+                                        <input type="text" id="country" class="form-control mb-4" placeholder="country" name="country" value="<%= typeof country !='undefined' ? country:'' %>" required>
+                                        <input type="text" id="pincode" class="form-control mb-4" placeholder="pincode" name="pincode" value="<%= typeof pincode !='undefined' ? pincode:'' %>" required>
+                                        <input type="text" id="bio" class="form-control mb-4" placeholder="bio" name="bio" value="<%= typeof bio !='undefined' ? bio:'' %>" required>
+
+                                        <!-- <input type="password" id="password" class="form-control mb-4" placeholder="Confirm Password" name="password2" value="<%= typeof password2 !='undefined' ? password2:'' %>" required> -->
+                                        <button class="btn btn-info btn-block my-4" type="submit">Save Profile</button>
+
+                                        <p>Already Registered?
+                                            <a href="/login">Login</a>
+                                        </p>
+
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+                            <%- include('../includes/end.ejs') %>
