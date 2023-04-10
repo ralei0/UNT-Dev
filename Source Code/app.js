@@ -14,10 +14,10 @@ const indexRoutes = require('./routes/index');
 const adminRoutes = require('./routes/admin/admin');
 const adminAuthRoutes = require('./routes/admin/adminAuth');
 const userAuthRoutes = require('./routes/user/userAuth');
-
+const shopRoutes = require('./routes/user/shop');
 const Admin = require('./models/Admin');
 const User = require('./models/User.js');
-
+const nodemailer = require('nodemailer');
 const app = express();
 const csrfProtection = csrf();
 
@@ -32,7 +32,13 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
         console.log(err);
     });
 
-
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'rajatmohantyrm768@gmail.com',
+        pass: 'huibjwgevwwcaozp'
+    }
+});
 
 
 
@@ -181,6 +187,7 @@ app.use(adminAuthRoutes);
 app.use(adminRoutes);
 app.use(indexRoutes);
 app.use(userAuthRoutes);
+app.use(shopRoutes);
 app.use(errorControllers.get404);
 
 app.listen(port, () => {
