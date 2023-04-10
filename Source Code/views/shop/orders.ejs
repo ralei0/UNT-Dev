@@ -1,0 +1,31 @@
+<%- include('../includes/head.ejs') %>
+<body>
+<%- include('../includes/navigation.ejs') %>
+<% if(error_msg !='undefined') {%>
+    <strong>  <%= error_msg %></strong>
+
+<% } %>
+
+        <main>
+            <% if (orders.length <= 0) { %>
+                <h1>Nothing there!</h1>
+             <% } else { %>
+               
+    
+                    <% orders.forEach(order => { %>
+                      
+                        <li class="orders__item">
+                           <h3>Order Number - # <%= order.total %>  - Date :<%= order.date.getDate()+"/"+order.date.getMonth()+"/"+order.date.getYear() %> </h3>
+                            <ul class="orders__products">
+                                <% order.products.forEach(p => { %>
+                                    
+                                    <img src="<%= p.product.imageUrl %>" class="img-thumbnail" width="260" height="240" alt="<%= p.product.title %>">
+                                    <h3><b><li class="orders__products-item"><%= p.product.title %> (Quantity=<%= p.quantity %>)</li></b></h3>
+                                <% }); %>
+                            </ul>
+                        </li>
+                    <% }); %>
+                </ul>
+            <% } %>
+        </main>
+        <%- include('../includes/end.ejs') %>
