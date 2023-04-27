@@ -20,7 +20,7 @@
                     <img src="<%= x.productId.imageUrl %>" class="img-thumbnail" width="260" height="240" alt="<%= x.productId.title %>">
                 </div>
                 <div class="card__content">
-                    <h2 class="product__price"><b>₹<%= x.productId.price %></b></h2>
+                    <h2 class="product__price"><b>$<%= x.productId.price %></b></h2>
                     <h2><b>Quantity = <%= x.quantity %></b></h2>
                 </div>
                 <div class="card__actions">
@@ -39,7 +39,11 @@
         <div class="centered">
         <form action="/create-order" method=POST>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button type="sumbit" class="btn btn-success">Click here to order all the items.</button>
+            <form>
+                <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Gzupwrob3IihPG"
+                    async> </script>
+            </form>
+            <!-- <button type="sumbit" class="btn btn-success">Click here to order all the items.</button> -->
         </form>
     </div>
 
