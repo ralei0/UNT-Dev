@@ -17,7 +17,7 @@ const userAuthRoutes = require('./routes/user/userAuth');
 const shopRoutes = require('./routes/user/shop');
 const Admin = require('./models/Admin');
 const User = require('./models/User.js');
-const nodemailer = require('nodemailer');
+
 const app = express();
 const csrfProtection = csrf();
 
@@ -31,18 +31,6 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true 
     .catch(err => {
         console.log(err);
     });
-
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'rajatmohantyrm768@gmail.com',
-        pass: 'huibjwgevwwcaozp'
-    }
-});
-
-
-
-
 
 
 const fileStorage = multer.diskStorage({
