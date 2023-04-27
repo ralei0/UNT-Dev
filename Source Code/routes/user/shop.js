@@ -5,6 +5,7 @@ const isAuth = require('../../middlewares/user/isAuth');
 const router= express.Router();
 
 router.get('/home',isAuth,shopController.getHome);
+router.post('/search',shopController.getSearch);
 router.get('/cart',isAuth,shopController.getCart);
 router.post('/cart',isAuth,shopController.postCart);
 router.post('/delete-cart-item',isAuth,shopController.postCartDeleteItem);
