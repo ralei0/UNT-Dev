@@ -15,20 +15,29 @@
         </div>
     
   <% if(product.length>0) {%>
-    <div class="container">
-        <div class="row">
-            <div>
-               
-                <h5>List of all the available products.</h5>
-                <br>
-            </div>
-           
-
-        </div>
-
-    </div>
+    
    
-        <div class="card-columns" >
+        <div class="container ">
+            <div class="row" style="margin-left: 250px;">
+    
+                <form class="form-control-lg mt-3 w-75 p-3"
+                    action="/search" method="POST"
+                    enctype="multipart/form-data">
+    
+                    <div class="form-row">
+                        <input type="text" class="form-control" name="search" placeholder="Serach keyword">
+                    </div>
+
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="btn btn-primary mt-1">
+                                Search
+                            </button>
+                </form>
+            </div>
+        </div>
+   
+
+        <div class="card-columns mt-3" >
             <% for (let x of product) { %>
             <article class="card product-item" >
                 <header class="card__header">
@@ -38,7 +47,7 @@
                     <img src="<%= x.imageUrl %>" class="img-thumbnail" width="260" height="240" alt="<%= x.title %>">
                 </div>
                 <div class="card__content">
-                    <h2 class="product__price"><b>₹<%= x.price %></b></h2>
+                    <h2 class="product__price"><b>$<%= x.price %></b></h2>
                     <p class="product__description"><%= x.description %></p>
                 </div>
                 <div class="card__actions">
