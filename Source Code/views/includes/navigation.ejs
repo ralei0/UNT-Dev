@@ -1,25 +1,25 @@
+
+
 <nav class="navbar navbar-expand-md navHead navItem navbar-dark bg-dark">
     <div>
         <% if(isAuthenticated) { %>
-            <a class="navbar-brand " href="/home">
-                    E-Shoe Shopping
+            <a class="navbar-brand ml-4" href="/home">
+                    Sneaky Shoes
                 </a>
             <% }else if(!isAdmin){ %>
-                <a class="navbar-brand " href="/">
-                        E-Shoe Shopping
+                <a class="navbar-brand ml-4" href="/">
+                        Sneaky Shoes
                     </a>
                 <% } %>
                     <%if(isAdmin) {%>
-                        <a class="navbar-brand " href="/admin/home">
-                            E-Shoe Shopping
+                        <a class="navbar-brand ml-4" href="/admin/home">
+                            Sneaky Shoes
                         </a>
                         <% } %>
 
 
 
     </div>
-
-
 
     <!-- Navbar Collapse -->
     <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,9 +39,7 @@
                 <% }else {%>
 
                     <% if(isAuthenticated) { %>
-                        <input type="text" placeholder="Search.." name="search">
                         <li class="nav-item">
-
                             <a class="nav-link smoothScroll" style="color: #fafeff;" href="/profile">Update Profile</a>
                         </li>
 
@@ -63,18 +61,26 @@
                             </form>
                         </li>
                         <% } else {%>
-                            <input type="text" placeholder="Search.." name="search">
+                            
+                                    
+                                        <li class="nav-item mr-3">
+                                            <a class="nav-link smoothScroll" style="color: white; " href="/login">Buyer Login</a>
+                                        </li>
+                                        <li class="nav-item mr-3">
+                                            <a class="nav-link smoothScroll" style="color: white;" href="/register">Buyer Sign Up</a>
+                                        </li>
+                            
+                            <!-- <li class="nav-item" style="margin-left: 20px; margin-right: 20px;"> -->
+                               
+                                    
+                                        <li class="nav-item mr-3">
+                                            <a class="nav-link smoothScroll" style="color: white;" href="/admin/login">Seller-Login</a>
+                                        </li>
+                                  
+                            <!-- </li> -->
+
                             <li class="nav-item">
-                                <a class="nav-link smoothScroll" style="color: #fafeff;" href="/login">Buyer Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link smoothScroll" style="color: #fafeff;" href="/register">Buyer Sign Up</a>
-                            </li>
-                            <li class="nav-item">
-                                <b> <a class="nav-link smoothScroll" style="color: #95f554;" href="/admin/login">Seller-Login</a></b>
-                            </li>
-                            <li class="nav-item">
-                                <b><a class="nav-link smoothScroll" style="color:#95f554;" href="/admin/register">Dummy-Seller-Register</a></b>
+                                <a class="nav-link smoothScroll" style="color: white;" href="/admin/register">Seller-Register</a>
                             </li>
                             <% } %>
                                 <%} %>
