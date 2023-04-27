@@ -16,9 +16,7 @@
                         <% } %>
                             <div class="card" style="width:auto;border: none;text-align: center; background-image: url('gif_image.gif');">
                                 <div class="card-body">
-                                    <form class="text-center   p-5" style="width:20rem;text-align: center;" action="/register" method="POST">
-
-
+                                    <form class="text-center p-5" id="sign-in" style="width:20rem; text-align: center;" action="/register" method="POST">
 
                                         <p class="h4 mb-4">Sign up</p>
 
@@ -26,7 +24,7 @@
                                         <input type="email" id="email" class="form-control mb-4" placeholder="E-mail" name="email" value="<%= typeof email !='undefined' ? email:'' %>" required>
                                         <input type="password" id="password" class="form-control mb-4" placeholder="Password" name="password" value="<%= typeof password !='undefined' ? password:'' %>" required>
                                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                                        <input type="password" id="password" class="form-control mb-4" placeholder="Confirm Password" name="password2" value="<%= typeof password2 !='undefined' ? password2:'' %>" required>
+                                        <input type="password" id="password2" class="form-control mb-4" placeholder="Confirm Password" name="password2" value="<%= typeof password2 !='undefined' ? password2:'' %>" required>
                                         <button class="btn btn-info btn-block my-4" type="submit">Sign up</button>
 
                                         <p>Already Registered?
@@ -40,3 +38,47 @@
 
 
                             <%- include('../includes/end.ejs') %>
+
+                            <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+                            <script>
+                                jQuery("#sign-in").validate({
+                                    rules: {
+                                        name: {
+                                            required: true,
+                                        },
+                                        email: {
+                                            required: true,
+                                            email: true
+                                        },
+                                        password: {
+                                            required: true,
+                                            minlength: 8
+                                        },
+                                        password2: {
+                                            required: true,
+                                            minlength: 8
+                                        },
+                                    },
+                                    messages: {
+                                        name: {
+                                            required: "Please enter name",
+                                        },
+                                        emailID: {
+                                            required: "Please enter email",
+                                            email: "Please enter valid email"
+                                        },
+                                        password: {
+                                            required: "Please enter password",
+                                            minlength: "Password must be contains 8 char"
+                                        },
+                                        password2: {
+                                            required: "Please enter confirm password",
+                                            minlength: "Password must be contains 8 char"
+                                        }
+                                    },
+                                    submitHandler: function (form) {
+                                        form.submit();
+                                    }
+                                });
+                            </script>
