@@ -1,14 +1,5 @@
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
-const nodemailer = require('nodemailer');
-
-var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: 'rajatmohantyrm768@gmail.com',
-        pass: 'huibjwgevwwcaozp'
-    }
-});
 
 
 exports.getLogin = (req, res, next) => {
@@ -95,20 +86,6 @@ exports.postRegister = (req, res, next) => {
 
                             newUser.save()
                                 .then(user => {
-                                    var mailOptions = {
-                                        from: 'rajatmohantyrm768@gmail.com',
-                                        to: email,
-                                        subject: 'Thank you for Registration',
-                                        html: 'Your Registration is success'
-                                    };
-
-                                    transporter.sendMail(mailOptions, function(error, info) {
-                                        if (error) {
-                                            console.log(error);
-                                        } else {
-                                            console.log('Email sent: ' + info.response);
-                                        }
-                                    });
                                     req.flash('success_msg', 'You are registered Successfully!');
                                     res.redirect('/login');
                                 })
@@ -131,9 +108,8 @@ exports.postRegister = (req, res, next) => {
 
 };
 
+exports.postLogin = async(req, res) => {
 
-
-exports.postLogin = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
     User.findOne({ email: email })
