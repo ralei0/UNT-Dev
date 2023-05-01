@@ -1,168 +1,68 @@
-const Product = require('../../models/Product');
-const User = require('../../models/User');
-const Order = require('../../models/Order');
+const bcrypt = require('bcryptjs');
+const Profile = require('../../models/Profile');
 
-exports.getHome = (req, res, next) => {
-    Product.find()
-        .then(products => {
-            //console.log("hjghghjgjg", req);
-            res.render('user/home', {
-                product: products,
-                pageTitle: 'Home',
-                name: req.session.user.name
 
-            });
-        })
-        .catch((err) => { //console.log(err)
-            req.flash('error_msg', 'Something wrong happend.');
-            res.redirect('/home');
-        });
+exports.createProfile = (req, res, next) => {
+    res.render('user/profile', {
+        pageTitle: 'Profile',
 
+    });
 };
-exports.getSearch = (req, res, next) => {
-    const search = req.body.search;
-    console.log(req.body);
-    Product.find({title:search})
-        .then(products => {
-            //console.log("hjghghjgjg", req);
-            res.render('user/home', {
-                product: products,
-                pageTitle: 'Home',
-                name: req.session.user.name
 
-            });
-        })
-        .catch((err) => { //console.log(err)
-            req.flash('error_msg', 'Something wrong happend.');
-            res.redirect('/home');
-        });
+exports.createProfile2 = (req, res, next) => {
+    const userId = req.body.userId;
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const age = req.body.age;
 
-};
-exports.getProduct = (req, res, next) => {
-    const id1 = req.params.productId;
-    Product.findById(id1)
-        .then((product) => {
-            res.render('shop/product-detail', {
-                product: product,
-                pageTitle: 'Product details',
-            });
-        })
-        .catch((err) => { //console.log(err)
-            req.flash('error_msg', 'Something wrong happend.');
-            res.redirect('/home');
-        });
-}
+    const gender = req.body.gender;
+    //const profilePicture = req.body.profilePicture;
+    const websiteLink = req.body.websiteLink;
+    const youtubeLink = req.body.youtubeLink;
+    const addressLine1 = req.body.addressLine1;
+    const addressLine2 = req.body.addressLine2;
+    const city = req.body.city;
+    const state = req.body.state;
+    const country = req.body.country;
+    const pincode = req.body.pincode;
+    const bio = req.body.bio;
 
-exports.getCart = (req, res, next) => {
+    // const name = req.body.name;
+    // const email = req.body.email;
+    // const password = req.body.password;
+    // const password2 = req.body.password2;
+    // const time = new Date().toISOString().split('T')[0];
 
-    req.user
-        .populate('cart.items.productId')
-        .execPopulate()
+    const newProfile = new Profile({ //instance of the user model
+        userId,
+        firstName,
+        lastName,
+        age,
+        gender,
+        //profilePicture,
+        websiteLink,
+        youtubeLink,
+        addressLine1,
+        addressLine2,
+        city,
+        state,
+        country,
+        pincode,
+        bio
+
+
+        // name,
+        // email,
+        // password,
+        // time
+    });
+    newProfile.save()
         .then(user => {
-            const products = user.cart.items;
-            return res.render('shop/cart', {
-                products: products,
-                pageTitle: 'Your Cart',
-            });
+            req.flash('success_msg', 'Profile Saved Successfully!');
+            res.redirect('/profile');
         })
         .catch((err) => { //console.log(err)
             req.flash('error_msg', 'Something wrong happend.');
             res.redirect('/home');
         });
 }
-
-exports.postCart = (req, res, next) => {
-
-    const id = req.body.productId;
-    Product.findById(id)
-        .then(product => {
-            return req.user.addToCart(product);
-        })
-        .then(result => {
-            res.redirect('/cart');
-        })
-        .catch((err) => { //console.log(err)
-            req.flash('error_msg', 'Something wrong happend.');
-            res.redirect('/home');
-        });
-};
-
-exports.postCartDeleteItem = (req, res, next) => {
-    const id = req.body.productId;
-    // console.log(id);
-    req.user
-        .removeFromCart(id)
-        .then(result => {
-            // console.log("deleted");
-            res.redirect('/cart');
-        })
-        .catch((err) => { //console.log(err)
-            req.flash('error_msg', 'Something wrong happend.');
-            res.redirect('/home');
-        });
-
-};
-
-
-exports.getOrders = (req, res, next) => {
-    Order.find({ "user.userId": req.user._id })
-        .then(orders => {
-
-            res.render('shop/orders', {
-                pageTitle: 'Your Orders',
-                orders: orders,
-
-            });
-        })
-        .catch((err) => { //console.log(err)
-            req.flash('error_msg', 'Something wrong happend.');
-            res.redirect('/home');
-        });
-
-
-}
-
-exports.postOrder = (req, res, next) => {
-    req.user
-        .populate('cart.items.productId')
-        .execPopulate()
-        .then(user => {
-            const products = user.cart.items.map(i => {
-                return { quantity: i.quantity, product: {...i.productId._doc } };
-            });
-
-            Order.countDocuments({}, (err, count) => {
-                const order = new Order({
-                    user: {
-                        email: req.user.email,
-                        userId: req.user,
-                    },
-                    products: products,
-                    total: count + 1
-                });
-                return order.save();
-            });
-
-
-        })
-        .then(result => {
-            return req.user.clearCart();
-        })
-        .then(result => {
-            res.redirect('/orders');
-        })
-        .catch((err) => { //console.log(err)
-            req.flash('error_msg', 'Something wrong happend.');
-            res.redirect('/home');
-        });
-
-
-};
-
-
-
-// exports.getCheckout = (req,res,next) => {
-// res.render('shop/checkout',{
-// pageTitle:'Checkout'
-// });
-// }
