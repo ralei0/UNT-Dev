@@ -2,9 +2,27 @@ const Product = require('../../models/Product');
 const User = require('../../models/User');
 const Order = require('../../models/Order');
 
-
 exports.getHome = (req, res, next) => {
     Product.find()
+        .then(products => {
+            //console.log("hjghghjgjg", req);
+            res.render('user/home', {
+                product: products,
+                pageTitle: 'Home',
+                name: req.session.user.name
+
+            });
+        })
+        .catch((err) => { //console.log(err)
+            req.flash('error_msg', 'Something wrong happend.');
+            res.redirect('/home');
+        });
+
+};
+exports.getSearch = (req, res, next) => {
+    const search = req.body.search;
+    console.log(req.body);
+    Product.find({title:search})
         .then(products => {
             //console.log("hjghghjgjg", req);
             res.render('user/home', {
@@ -111,10 +129,7 @@ exports.postOrder = (req, res, next) => {
         .then(user => {
             const products = user.cart.items.map(i => {
                 return { quantity: i.quantity, product: {...i.productId._doc } };
-
             });
-
-            console.log('ggggggg', products);
 
             Order.countDocuments({}, (err, count) => {
                 const order = new Order({
@@ -125,10 +140,6 @@ exports.postOrder = (req, res, next) => {
                     products: products,
                     total: count + 1
                 });
-
-
-
-
                 return order.save();
             });
 
