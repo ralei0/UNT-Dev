@@ -6,7 +6,6 @@ exports.getHome = (req, res, next) => {
     res.render('./admin/home', {
         pageTitle: "Admin Panel",
     });
-
 };
 
 
@@ -17,7 +16,7 @@ exports.getAddProducts = (req, res, next) => {
         isAuthenticated: req.session.isLoggedIn,
         editing: false
     });
-}
+};
 
 exports.postAddProducts = (req, res, next) => {
 
